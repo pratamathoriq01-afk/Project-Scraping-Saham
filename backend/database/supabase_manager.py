@@ -25,7 +25,11 @@ from quant_engine.utils import now_wib_iso, sanitize_for_json
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 ENV_PATH = BACKEND_DIR / ".env"
-LOCAL_FALLBACK_PATH = Path(__file__).resolve().parent / "local_fallback_cache.json"
+LOCAL_FALLBACK_PATH = (
+    Path("/tmp/equilens_local_fallback_cache.json")
+    if os.getenv("VERCEL")
+    else Path(__file__).resolve().parent / "local_fallback_cache.json"
+)
 
 # Load backend/.env without overriding process env vars
 load_dotenv(ENV_PATH, override=False)

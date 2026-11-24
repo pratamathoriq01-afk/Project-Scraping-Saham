@@ -129,6 +129,25 @@ STOCK_PRESETS: list[dict[str, Any]] = [
 ]
 
 
+@app.get("/")
+async def get_root() -> dict[str, Any]:
+    return {
+        "status": "ok",
+        "service": "equilens-backend",
+        "message": "EquiLens IDX Quantitative Backend API is running.",
+        "endpoints": {
+            "health": "/api/health",
+            "sourcesHealth": "/api/sources/health",
+            "search": "/api/stocks/search?q=BBCA",
+            "compare": "/api/compare?tickers=BBCA,ADRO,ICBP",
+            "charts": "/api/charts/BBCA?timeframe=1Y",
+            "financials": "/api/financials/BBCA?period=annual",
+            "docs": "/docs",
+        },
+        "syncedAt": now_wib_display(),
+    }
+
+
 @app.get("/api/health")
 async def get_health() -> dict[str, Any]:
     sb = await db_manager.check_health()
