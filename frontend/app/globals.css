@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* Tailwind CSS v4: bind dark: variant strictly to .dark class for next-themes Light/Dark/System */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* EquiLens v2 WCAG 2.1 AA Color & Surface System */
+:root {
+  --bg-canvas: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f1f5f9;
+  --border-subtle: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --ink-primary: #0f172a;
+  --ink-secondary: #475569;
+  --ink-muted: #64748b;
+
+  --cta-bg: #0f172a;
+  --cta-bg-hover: #1e293b;
+  --cta-fg: #ffffff;
+
+  --positive: #047857;
+  --positive-soft: #ecfdf5;
+  --positive-border: #a7f3d0;
+
+  --negative: #be123c;
+  --negative-soft: #fff1f2;
+  --negative-border: #fecdd3;
+
+  --caution: #92400e;
+  --caution-soft: #fef3c7;
+  --caution-border: #fde68a;
+
+  --info: #1d4ed8;
+  --info-soft: #eff6ff;
+  --info-border: #bfdbfe;
+}
+
+.dark {
+  --bg-canvas: #0b0f19;
+  --bg-surface: #111827;
+  --bg-elevated: #1a2234;
+  --border-subtle: #1f2937;
+  --border-strong: #334155;
+
+  --ink-primary: #f8fafc;
+  --ink-secondary: #cbd5e1;
+  --ink-muted: #94a3b8;
+
+  --cta-bg: #f8fafc;
+  --cta-bg-hover: #e2e8f0;
+  --cta-fg: #0b0f19;
+
+  --positive: #34d399;
+  --positive-soft: rgba(16, 185, 129, 0.14);
+  --positive-border: rgba(52, 211, 153, 0.3);
+
+  --negative: #fb7185;
+  --negative-soft: rgba(244, 63, 94, 0.14);
+  --negative-border: rgba(251, 113, 133, 0.3);
+
+  --caution: #fbbf24;
+  --caution-soft: rgba(245, 158, 11, 0.14);
+  --caution-border: rgba(251, 191, 36, 0.3);
+
+  --info: #60a5fa;
+  --info-soft: rgba(59, 130, 246, 0.16);
+  --info-border: rgba(96, 165, 250, 0.3);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --color-ink: var(--ink-primary);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+
+  --color-cta: var(--cta-bg);
+  --color-cta-hover: var(--cta-bg-hover);
+  --color-cta-fg: var(--cta-fg);
+
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-positive-border: var(--positive-border);
+
+  --color-negative: var(--negative);
+  --color-negative-soft: var(--negative-soft);
+  --color-negative-border: var(--negative-border);
+
+  --color-caution: var(--caution);
+  --color-caution-soft: var(--caution-soft);
+  --color-caution-border: var(--caution-border);
+
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--ink-primary);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Subtle GPU-friendly live price tick flash (zero React setState-in-effect) */
+@keyframes equilens-tick-up {
+  0% {
+    background-color: rgba(16, 185, 129, 0.24);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes equilens-tick-down {
+  0% {
+    background-color: rgba(244, 63, 94, 0.24);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-tick-up {
+  animation: equilens-tick-up 950ms ease-out;
+}
+
+.animate-tick-down {
+  animation: equilens-tick-down 950ms ease-out;
+}
+
+/* Institutional Print / PDF Export Stylesheet */
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    color-scheme: light !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  nav,
+  aside,
+  header {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  section,
+  article,
+  tr {
+    break-inside: avoid;
+  }
+}

@@ -1,12 +1,7 @@
-# Environment variables (never commit secrets)
-.env
-.env.local
-.env.*.local
-
 # Dependencies
 node_modules/
 
-# Build outputs
+# Next.js / Build outputs
 .next/
 out/
 dist/
@@ -16,6 +11,16 @@ build/
 .venv/
 __pycache__/
 *.py[cod]
+
+# Environment variables (never commit real secrets)
+.env
+.env.*
+!**/.env.example
+!**/.env*.example
+
+# Local runtime fallback cache
+backend/database/local_fallback_cache.json
+backend/database/*.tmp
 
 # Logs & OS files
 *.log
